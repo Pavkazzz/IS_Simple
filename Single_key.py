@@ -9,7 +9,7 @@ def crypt(text, key):
         alphabet_key.append((ord(char)))
 
     if len(text) // column != 0:
-        text += ' ' * (len(text) % column)
+        text += ' ' * (column - len(text) % column)
     matrix = []
     for num in range(0, column):
         matrix.append(text[num::column])
