@@ -8,11 +8,13 @@ def crypt(text, key):
     for char in key:
         alphabet_key.append((ord(char)))
 
+    if len(text) // column != 0:
+        text += ' ' * (len(text) % column)
     matrix = []
     for num in range(0, column):
         matrix.append(text[num::column])
 
-    #Делаем словарь из 2 списков
+    # Делаем словарь из 2 списков
     unsorted = dict(zip(alphabet_key, matrix))
     #Сортируем по ключу и выводим строкой
     return ''.join(collections.OrderedDict(sorted(unsorted.items())).values())
@@ -26,7 +28,7 @@ def decrypt(crypted_text, key):
 
     matrix = []
     for num in range(0, len(key)):
-        matrix.append(crypted_text[num*column:(num + 1)*column:])
+        matrix.append(crypted_text[num * column:(num + 1) * column:])
 
     unsorted = dict(zip(sorted(alphabet_key), matrix))
     text = ''
@@ -34,13 +36,14 @@ def decrypt(crypted_text, key):
 
     for item in range(len(text_list[0])):
         for num in reversed(range(0, len(key))):
-            text += text_list[num][item:item+1]
+            text += text_list[num][item:item + 1]
 
     return text
 
+
 if __name__ == '__main__':
     key = 'weq'
-    text = 'qwertyuoasdzxc1'
+    text = 'qwertyuoasdzxc'
     encrypted_string = crypt(text, key)
     print encrypted_string
     print decrypt(encrypted_string, key)
