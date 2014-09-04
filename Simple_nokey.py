@@ -1,11 +1,11 @@
-def crypt(text):
-    encrypted_text = []
-    number_column = 5
-    for row in range(0, number_column):
-        encrypted_text.append(text[row::number_column])
+# coding=utf-8
+def simple_crypt(text, column=5):
+    matrix = []
+    for num in range(0, column):
+        matrix.append(text[num::column])
 
-    return ''.join(encrypted_text)
+    return ''.join(matrix)
 
 
 if __name__ == '__main__':
-    print crypt('mpt the best')
+    print simple_crypt('mpt the best', 5)
