@@ -3,16 +3,18 @@ import collections
 
 
 def crypt(text, key):
-    column = len(key)
     alphabet_key = []
     for char in key:
         alphabet_key.append((ord(char)))
 
-    if len(text) // column != 0:
-        text += ' ' * (column - len(text) % column)
+    #Добавляем пробелов для ровности
+    if len(text) // len(key) != 0:
+        text += ' ' * (len(key) - len(text) % len(key))
+
+    #Делим на столбцы
     matrix = []
-    for num in range(0, column):
-        matrix.append(text[num::column])
+    for num in range(0, len(key)):
+        matrix.append(text[num::len(key)])
 
     # Делаем словарь из 2 списков
     unsorted = dict(zip(alphabet_key, matrix))
@@ -43,7 +45,7 @@ def decrypt(crypted_text, key):
 
 if __name__ == '__main__':
     key = 'weq'
-    text = 'qwertyuoasdzxc'
+    text = '123456789'
     encrypted_string = crypt(text, key)
     print encrypted_string
     print decrypt(encrypted_string, key)
